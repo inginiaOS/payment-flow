@@ -2,10 +2,54 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>สำเร็จ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชำระเงินสำเร็จ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Sukhumvit Set", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+    .btn-line {
+      display: inline-block;
+      background-color: #06C755;
+      color: #fff;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-line:hover {
+      background-color: #04a745;
+    }
+  </style>
+  <script>
+    // auto redirect ไป LINE หลังจาก 3 วินาที
+    setTimeout(() => {
+      window.location.href = "https://lin.ee/VvongoG";
+    }, 3000);
+  </script>
 </head>
 <body>
-  <h1>✅ การชำระเงินสำเร็จ</h1>
-  <p>ขอบคุณสำหรับการสั่งซื้อ</p>
+  <h1>✅ ชำระเงินสำเร็จ!</h1>
+  <p>ระบบกำลังพาคุณกลับไปยัง LINE ภายใน 3 วินาที<br>หากไม่เด้งอัตโนมัติ กดปุ่มด้านล่างได้เลย</p>
+  <a class="btn-line" href="https://lin.ee/VvongoG">กลับไปที่ LINE</a>
 </body>
 </html>
