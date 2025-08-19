@@ -1,0 +1,59 @@
+body {
+  font-family: "Sukhumvit Set", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 40px;
+  text-align: center;
+}
+h1 {
+  color: #222;
+  margin-bottom: 10px;
+}
+p {
+  margin-bottom: 30px;
+}
+button, .button {
+  background: #06c755;
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover, .button:hover {
+  background: #05b34d;
+}
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 20px;
+  flex-direction: column;
+  z-index: 9999;
+}
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #06c755;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+.container {
+  margin-top: 100px;
+}
