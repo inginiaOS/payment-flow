@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InginiaOS LITE – สมัครเพียง 880 บาท/เดือน</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InginiaOS LITE</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" alt="InginiaOS LITE Logo" class="logo">
+      <h1>InginiaOS LITE</h1>
+      <p>AI Content Planner สำหรับธุรกิจของคุณ</p>
+      <button id="payBtn" class="cta">สมัครตอนนี้</button>
+    </div>
+  </header>
 
-  <!-- Promo Section (เปิดมาก็เจอ) -->
-  <section class="promo fade-in">
-    <div class="promo-content">
-      <img src="https://img2.pic.in.th/pic/-notion-copy.md.png" alt="โปรโมชั่น 880 บาท" />
-      <div class="promo-text">
-        <h1>InginiaOS LITE</h1>
-        <h2>เริ่มต้นเพียง 880 บาท/เดือน</h2>
-        <p>ระบบ Multi-AI ที่จะคิด เขียน และสร้างคอนเทนต์แทนคุณ <br>
-        พร้อม Dashboard + Strategy Report ทุกเดือน</p>
-        <button id="payBtn">สมัครตอนนี้</button>
+  <!-- Promo Image -->
+  <section class="promo">
+    <img src="https://img2.pic.in.th/pic/-notion-copy.md.png" alt="Promo" class="promo-img">
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>สิ่งที่คุณจะได้รับ</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>30 แคปชัน + คอนเทนต์ไอเดีย</h3>
+        <p>AI Multi-Model (Gemini + GPT + Claude) เขียนให้ครบ ไม่ต้องเสียเวลา Prompt เอง</p>
+      </div>
+      <div class="feature">
+        <h3>Content Calendar</h3>
+        <p>วางแผนโพสต์ล่วงหน้า ดูภาพรวมทั้งเดือนใน Notion</p>
+      </div>
+      <div class="feature">
+        <h3>Marketing Strategy Report</h3>
+        <p>รับรายงานกลยุทธ์ + Framework ใหม่ ๆ ก่อนใคร</p>
+      </div>
+      <div class="feature">
+        <h3>Special Access</h3>
+        <p>วิดีโอเทคนิคการตลาด + AI Tools พิเศษที่ไม่ต้องเสียเงินเรียนเป็นหมื่น</p>
       </div>
     </div>
   </section>
 
-  <!-- Loading Overlay -->
+  <!-- Overlay -->
   <div id="overlay">
     <div class="spinner"></div>
     <div>⏳ กำลังเตรียมการชำระเงิน กรุณารอสักครู่...</div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

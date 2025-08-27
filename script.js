@@ -1,11 +1,11 @@
 async function main() {
-  await liff.init({ liffId: "2007908663-5ZQOKd2G" }); // ✅ ใช้ LIFF ของคุณ
+  await liff.init({ liffId: "2007908663-5ZQOKd2G" }); // ใช้ LIFF จริง
 
   const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
 
   document.getElementById("payBtn").addEventListener("click", async () => {
     overlay.style.display = "flex";
-
     try {
       const response = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
         method: "POST",
@@ -15,10 +15,9 @@ async function main() {
 
       const data = await response.json();
       if (data.checkout_url) {
-        // ✅ เด้งไป Stripe เลยทันที
         window.location.href = data.checkout_url;
       } else {
-        overlay.innerHTML = "❌ เกิดข้อผิดพลาด ไม่พบลิงก์ชำระเงิน";
+        overlay.innerHTML = "❌ ไม่พบลิงก์ชำระเงิน";
       }
     } catch (err) {
       console.error(err);
@@ -27,13 +26,3 @@ async function main() {
   });
 }
 main();
-
-// Scroll animation
-document.addEventListener("scroll", () => {
-  document.querySelectorAll(".fade-in").forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 50) {
-      el.classList.add("visible");
-    }
-  });
-});
