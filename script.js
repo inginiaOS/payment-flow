@@ -1,48 +1,55 @@
-let lineId = null;
+// ===== เริ่มต้น LIFF =====
+liff.init({ liffId: "2007908663-5ZQOKd2G" })
+  .then(async () => {
+    if (!liff.isLoggedIn()) {
+      liff.login();
+    } else {
+      try {
+        const profile = await liff.getProfile();
+        const lineId = profile.userId;
+        console.log("✅ LINE ID:", lineId);
 
-// เริ่มต้น LIFF
-liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
-  if (!liff.isLoggedIn()) {
-    liff.login();
-  } else {
-    try {
-      const profile = await liff.getProfile();
-      lineId = profile.userId;
-      localStorage.setItem("lineId", lineId); // ✅ เก็บใน localStorage
-      console.log("LINE ID:", lineId);
-    } catch (err) {
-      console.error("ไม่สามารถดึง LINE Profile ได้:", err);
+        // เก็บไว้ใน localStorage (กันหายตอนเปลี่ยนหน้า)
+        localStorage.setItem("lineId", lineId);
+      } catch (err) {
+        console.error("❌ ดึงโปรไฟล์ไม่สำเร็จ:", err);
+      }
     }
-  }
-});
+  })
+  .catch(err => console.error("❌ LIFF init error:", err));
 
-// เมื่อกดปุ่มจ่ายเงิน
+
+// ===== Stripe Init =====
+const stripe = Stripe("pk_test_51RwmOKEytqyqUsDq1TISRowwXfn2e4hwV9lGSyvcP4F6kv8tlMNnNUDNVT4MGcIFzYd3ffhWMNdalSuSXS30GzRM009oI1CvVr");
+
+
+// ===== ปุ่มจ่ายเงิน =====
 document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
 
   try {
-    // ถ้า localStorage ยังว่าง → ดึงใหม่
-    if (!lineId) {
-      lineId = localStorage.getItem("lineId") || null;
-    }
-
-    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+    // 1. เรียก Make → สร้าง checkout session
+    const res = await fetch("https://hook.eu2.make.com/xxxx", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId }) // ✅ ส่งไปแน่นอน
+      body: JSON.stringify({
+        lineId: localStorage.getItem("lineId") || null
+      })
     });
 
     const data = await res.json();
+    console.log("✅ Response จาก Make:", data);
+
+    // 2. ถ้ามี checkout_url → redirect เลย
     if (data.checkout_url) {
       window.location.href = data.checkout_url;
     } else {
-      alert("❌ ไม่พบ checkout_url");
-      document.getElementById("overlay").style.display = "none";
+      throw new Error("ไม่มี checkout_url กลับมา");
     }
 
   } catch (err) {
-    console.error("เกิดข้อผิดพลาด:", err);
-    alert("❌ ไม่สามารถเริ่มการชำระเงินได้");
+    console.error("❌ Checkout error:", err);
+    alert("ไม่สามารถเริ่มการชำระเงินได้");
     document.getElementById("overlay").style.display = "none";
   }
 });
