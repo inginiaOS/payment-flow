@@ -1,11 +1,18 @@
+let lineId = null;
+
 // เริ่มต้น LIFF
 liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
-    const profile = await liff.getProfile();
-    const lineId = profile.userId;
-    localStorage.setItem("lineId", lineId); // เก็บไว้ใช้ทีหลัง
+    try {
+      const profile = await liff.getProfile();
+      lineId = profile.userId;
+      localStorage.setItem("lineId", lineId); // ✅ เก็บใน localStorage
+      console.log("LINE ID:", lineId);
+    } catch (err) {
+      console.error("ไม่สามารถดึง LINE Profile ได้:", err);
+    }
   }
 });
 
@@ -14,20 +21,20 @@ document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
 
   try {
-    const lineId = localStorage.getItem("lineId");
+    // ถ้า localStorage ยังว่าง → ดึงใหม่
+    if (!lineId) {
+      lineId = localStorage.getItem("lineId") || null;
+    }
 
-    // 🔗 ส่งไป Make เพื่อสร้าง Checkout Session
     const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId })
+      body: JSON.stringify({ lineId }) // ✅ ส่งไปแน่นอน
     });
 
     const data = await res.json();
-    console.log("Response from Make:", data);
-
     if (data.checkout_url) {
-      window.location.href = data.checkout_url; // ✅ พาไป Stripe Checkout
+      window.location.href = data.checkout_url;
     } else {
       alert("❌ ไม่พบ checkout_url");
       document.getElementById("overlay").style.display = "none";
