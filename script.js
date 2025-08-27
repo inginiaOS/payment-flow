@@ -4,36 +4,41 @@ liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
     liff.login();
   } else {
     const profile = await liff.getProfile();
-    const lineId = profile.userId; 
-    localStorage.setItem("lineId", lineId); 
+    const lineId = profile.userId; // ✅ ได้ lineId
+    localStorage.setItem("lineId", lineId); // เก็บไว้ใช้ตอน checkout
   }
 });
 
 // Stripe init
 const stripe = Stripe("pk_test_51RwmOKEytqyqUsDq1TISRowwXfn2e4hwV9lGSyvcP4F6kv8tlMNnNUDNVT4MGcIFzYd3ffhWMNdalSuSXS30GzRM009oI1CvVr");
 
-// ปุ่มจ่ายเงิน
+// เมื่อกดปุ่มจ่ายเงิน
 document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
 
   try {
-    const res = await fetch("/create-checkout-session", { method: "POST" });
-    const session = await res.json();
-
+    // ดึง lineId ที่ได้จาก LIFF
     const lineId = localStorage.getItem("lineId");
 
-    // ส่งข้อมูลไป Make
-    await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+    // ยิงตรงไปที่ Make webhook → ให้ Make สร้าง Checkout Session
+    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        checkoutSessionId: session.id,
-        lineId: lineId
-      })
+      body: JSON.stringify({ lineId })
     });
 
-    // ไปหน้า Stripe Checkout
-    await stripe.redirectToCheckout({ sessionId: session.id });
+    const data = await res.json();
+
+    if (!data.id) {
+      throw new Error("ไม่ได้รับ session.id จาก Make");
+    }
+
+    // Redirect ไป Stripe Checkout
+    const result = await stripe.redirectToCheckout({ sessionId: data.id });
+
+    if (result.error) {
+      throw result.error;
+    }
 
   } catch (err) {
     console.error("เกิดข้อผิดพลาด:", err);
