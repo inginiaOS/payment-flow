@@ -3,26 +3,17 @@
 // ---------------------------
 
 // 1. เริ่มต้น LIFF
+let lineId = null;
+
 liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
     try {
-      // ✅ ดึงโปรไฟล์ทันทีที่เปิด LIFF
       const profile = await liff.getProfile();
-      const lineId = profile.userId;
-
-      // เก็บกันหาย (backup)
-      localStorage.setItem("lineId", lineId);
-      console.log("LINE ID ส่งเข้า Webhook:", lineId);
-
-      // ✅ ส่งเข้า Webhook ของ Make โดยตรง (เก็บใน Data Store)
-      await fetch("https://hook.eu2.make.com/xxxxxxxxxx", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lineId })
-      });
-
+      lineId = profile.userId;
+      localStorage.setItem("lineId", lineId); // backup กันหาย
+      console.log("LINE ID ที่ดึงมาได้:", lineId);
     } catch (err) {
       console.error("❌ ไม่สามารถดึง LINE Profile ได้:", err);
     }
@@ -34,17 +25,23 @@ document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
 
   try {
-    // ✅ แค่เรียก webhook เดิมที่สร้าง checkout session
+    // ถ้า lineId ยังว่าง → ลองดึงจาก localStorage
+    if (!lineId) {
+      lineId = localStorage.getItem("lineId") || null;
+    }
+
+    // ✅ ยิงไปที่ Webhook ของ Make พร้อมส่ง lineId
     const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({})
+      body: JSON.stringify({ lineId })
     });
 
     const data = await res.json();
 
     if (data.checkout_url) {
-      window.location.href = data.checkout_url; // Redirect ไป Stripe Checkout
+      // ✅ Redirect ไปหน้าชำระเงิน Stripe
+      window.location.href = data.checkout_url;
     } else {
       alert("❌ ไม่พบ checkout_url");
       document.getElementById("overlay").style.display = "none";
