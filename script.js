@@ -4,55 +4,40 @@ liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
     liff.login();
   } else {
     const profile = await liff.getProfile();
-    const lineId = profile.userId; // ✅ เก็บ Line ID
-    localStorage.setItem("lineId", lineId);
+    const lineId = profile.userId; 
+    localStorage.setItem("lineId", lineId); 
   }
 });
 
-// ฟังก์ชันเปิด overlay loading
-function showOverlay(msg = "⏳ กำลังเตรียมการชำระเงิน กรุณารอสักครู่...") {
-  const overlay = document.getElementById("overlay");
-  if (overlay) {
-    overlay.style.display = "flex";
-    overlay.innerHTML = `
-      <div class="spinner"></div>
-      <div>${msg}</div>
-    `;
+// Stripe init
+const stripe = Stripe("pk_test_51RwmOKEytqyqUsDq1TISRowwXfn2e4hwV9lGSyvcP4F6kv8tlMNnNUDNVT4MGcIFzYd3ffhWMNdalSuSXS30GzRM009oI1CvVr");
+
+// ปุ่มจ่ายเงิน
+document.getElementById("payBtn").addEventListener("click", async () => {
+  document.getElementById("overlay").style.display = "flex";
+
+  try {
+    const res = await fetch("/create-checkout-session", { method: "POST" });
+    const session = await res.json();
+
+    const lineId = localStorage.getItem("lineId");
+
+    // ส่งข้อมูลไป Make
+    await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        checkoutSessionId: session.id,
+        lineId: lineId
+      })
+    });
+
+    // ไปหน้า Stripe Checkout
+    await stripe.redirectToCheckout({ sessionId: session.id });
+
+  } catch (err) {
+    console.error("เกิดข้อผิดพลาด:", err);
+    alert("❌ ไม่สามารถเริ่มการชำระเงินได้");
+    document.getElementById("overlay").style.display = "none";
   }
-}
-
-// ฟังก์ชันซ่อน overlay
-function hideOverlay() {
-  const overlay = document.getElementById("overlay");
-  if (overlay) overlay.style.display = "none";
-}
-
-// เมื่อกดปุ่มสมัคร (ปุ่ม CTA ใน HTML)
-document.querySelectorAll(".cta-pay").forEach(btn => {
-  btn.addEventListener("click", async () => {
-    showOverlay();
-
-    try {
-      const response = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "create_checkout",
-          lineId: localStorage.getItem("lineId")
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.checkout_url) {
-        window.location.href = data.checkout_url; // ✅ redirect ไป Stripe
-      } else {
-        showOverlay("❌ เกิดข้อผิดพลาด ไม่พบลิงก์ชำระเงิน");
-      }
-    } catch (err) {
-      console.error("⚠️ Error:", err);
-      showOverlay("⚠️ เกิดข้อผิดพลาด กรุณาลองใหม่");
-      setTimeout(hideOverlay, 3000);
-    }
-  });
 });
