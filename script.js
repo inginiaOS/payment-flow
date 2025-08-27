@@ -10,8 +10,10 @@ async function main() {
       const response = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "create_checkout" })
-      });
+        body: JSON.stringify({
+  action: "create_checkout",
+  lineId: profile.userId
+});
 
       const data = await response.json();
       if (data.checkout_url) {
