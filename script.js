@@ -53,3 +53,6 @@ document.getElementById("payBtn").addEventListener("click", async () => {
     document.getElementById("overlay").style.display = "none";
   }
 });
+document.getElementById("payBtnBottom").addEventListener("click", () => {
+  document.getElementById("payBtn").click();
+});
