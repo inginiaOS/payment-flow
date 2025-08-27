@@ -5,47 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InginiaOS LITE</title>
   <link rel="stylesheet" href="style.css">
-  <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
   <!-- Hero -->
-  <header class="hero">
+  <header class="hero fade-in">
     <div class="hero-content">
       <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" alt="InginiaOS LITE Logo" class="logo">
-      <h1>InginiaOS LITE</h1>
-      <p>AI Content Planner สำหรับธุรกิจของคุณ</p>
+      <h1>ไม่ต้องคิดโพสต์เองอีกต่อไป!</h1>
+      <p class="subheadline">แพ็กเกจ 880 บาท ที่ให้ Multi-AI ช่วยคุณคิดกลยุทธ์การตลาดที่เฉพาะตัวสำหรับธุรกิจของคุณ และช่วยทำคอนเทนต์ครบทั้งเดือน</p>
       <button id="payBtn" class="cta">สมัครตอนนี้</button>
     </div>
   </header>
 
+  <!-- Feature Cards -->
+  <section class="cards">
+    <h2 class="fade-in">จากความวุ่นวาย → สู่ความชัดเจน</h2>
+    <p class="section-desc">❌ คิดคอนเทนต์ไม่ออก <br> ❌ เสียเวลาเป็นชั่วโมงแต่ไม่ได้โพสต์ <br> ❌ จ้างเอเจนซี่แพงแต่ไม่เข้าใจธุรกิจคุณ <br><br>
+    InginiaOS LITE ทำให้คุณมีปฏิทินคอนเทนต์มืออาชีพทันทีหลังสมัคร</p>
+    <div class="card-grid">
+      <div class="card slide-up">
+        <img src="https://img2.pic.in.th/pic/-LITE.md.png" alt="หน้าคอนเทนต์">
+        <h3>Content Database</h3>
+        <p>เก็บทุกโพสต์ของคุณแบบเป็นระบบ ทั้ง Hook, Caption, CTA อยู่ครบในที่เดียว ค้นหาและแก้ไขได้ง่าย ไม่ต้องเสียเวลาวุ่นวายกับไฟล์กระจัดกระจาย</p>
+      </div>
+      <div class="card slide-up">
+        <img src="https://img2.pic.in.th/pic/-LITE815c149ce9c60ee0.md.png" alt="ปฏิทินคอนเทนต์">
+        <h3>Content Calendar</h3>
+        <p>วางแผนคอนเทนต์ล่วงหน้า เห็นภาพรวมชัดทั้ง 30 วัน ปรับวันเวลาได้ทันที เหมือนมีทีมมืออาชีพจัดตารางโพสต์ให้คุณ!</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Promo Image -->
-  <section class="promo">
+  <section class="promo fade-in">
     <img src="https://img2.pic.in.th/pic/-notion-copy.md.png" alt="Promo" class="promo-img">
+   
   </section>
 
   <!-- Features -->
   <section class="features">
-    <h2>สิ่งที่คุณจะได้รับ</h2>
+    <h2>สิ่งที่คุณจะได้รับ ในราคา 880 บาท</h2>
     <div class="feature-grid">
       <div class="feature">
-        <h3>30 แคปชัน + คอนเทนต์ไอเดีย</h3>
-        <p>AI Multi-Model (Gemini + GPT + Claude) เขียนให้ครบ ไม่ต้องเสียเวลา Prompt เอง</p>
+        <h3>AI Multi-Model</h3>
+        <p>Gemini วิเคราะห์เทรนด์โลก → GPT ร่างไอเดีย → Claude ขัดภาษา = ได้โพสต์พร้อมใช้ โดยไม่ต้องเสียเวลา prompt เอง</p>
       </div>
       <div class="feature">
         <h3>Content Calendar</h3>
-        <p>วางแผนโพสต์ล่วงหน้า ดูภาพรวมทั้งเดือนใน Notion</p>
+        <p>30 วันเต็มใน Notion มองเห็นภาพรวม แก้ปัญหาการโพสต์สะเปะสะปะ</p>
       </div>
       <div class="feature">
         <h3>Marketing Strategy Report</h3>
-        <p>รับรายงานกลยุทธ์ + Framework ใหม่ ๆ ก่อนใคร</p>
+        <p>สรุปโทน, CTA และกลยุทธ์ที่ได้ผลจริง ส่งตรงทุกเดือน</p>
       </div>
       <div class="feature">
         <h3>Special Access</h3>
-        <p>วิดีโอเทคนิคการตลาด + AI Tools พิเศษที่ไม่ต้องเสียเงินเรียนเป็นหมื่น</p>
+        <p>Framework การตลาดใหม่ ๆ + วิดีโอเทคนิคการใช้ AI ที่ปกติคุณต้องเสียเงินหลักหมื่น</p>
       </div>
     </div>
   </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>ผู้ใช้งานจริงพูดว่า</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p>“ปกติเสียเวลาเป็นชั่วโมงแต่ไม่ได้โพสต์ พอใช้ InginiaOS LITE เหมือนยกภูเขาออกจากอก”</p>
+        <span>- เจ้าของร้านกาแฟ</span>
+      </div>
+      <div class="testimonial">
+        <p>“เคยจ้างฟรีแลนซ์เดือนละหลายพัน แต่ไม่ตรงใจ 880 บาทตรงนี้คุ้มแบบเหลือเชื่อ”</p>
+        <span>- ร้านเสื้อผ้าออนไลน์</span>
+      </div>
+      <div class="testimonial">
+        <p>“สิ่งที่ผมชอบคือรายงาน ทำให้รู้ว่าโพสต์ไหนได้ผลจริง ไม่ใช่แค่โพสต์ไปวัน ๆ”</p>
+        <span>- บริษัทสถาปนิก</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Pricing & Details -->
+  <section class="pricing fade-in">
+    <h1>880 บาท/เดือน = จบทุกปัญหาคอนเทนต์</h1>
+    <ul class="benefits">
+      <li>✅ 30 แคปชัน + ไอเดียคอนเทนต์ (AI Multi-Model)</li>
+      <li>✅ ปฏิทินคอนเทนต์ใน Notion</li>
+      <li>✅ รายงานกลยุทธ์รายเดือน ใช้ได้จริง</li>
+      <li>✅ Framework & Tools ใหม่ ๆ จาก RadiumLabs ก่อนใคร</li>
+      <li>✅ วิดีโอการตลาด + เทคนิค AI แบบไม่ต้องเสียเงินเรียนเพิ่ม</li>
+    </ul>
+  </section>
+
+  <!-- Floating Payment Box -->
+  <div class="floating-box slide-up">
+    <h3>เพียง 880 บาท/เดือนไม่มีบวกเพิ่ม</h3>
+    <p>คอนเทนต์ + กลยุทธ์ + AI Tools พร้อมใช้ทันที!</p>
+    <button id="payBtnBottom" class="cta">สมัครเลย</button>
+  </div>
 
   <!-- Overlay -->
   <div id="overlay">
