@@ -1,5 +1,5 @@
 body {
-  font-family: "Sukhumvit Set", "Kanit", sans-serif;
+  font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #fff;
   color: #111;
   margin: 0;
@@ -8,17 +8,25 @@ body {
   overflow-x: hidden;
 }
 
+/* Gradient Apple Style */
+.gradient-text {
+  background: linear-gradient(90deg, #0077ff, #00cc66);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
 /* Hero */
 .hero {
   text-align: center;
   padding: 100px 20px 60px;
   background: linear-gradient(to bottom, #fff, #f8f8f8);
 }
-.logo { width: 240px; margin-bottom: 20px; }
-.hero h1 { font-size: 48px; margin: 0; }
-.subheadline { font-size: 20px; color: #555; margin: 15px 0 30px; }
+.logo { width: 220px; margin-bottom: 20px; }
+.hero h1 { font-size: 52px; margin: 0; }
+.subheadline { font-size: 22px; color: #555; margin: 15px 0 30px; }
 .cta {
-  background: #00cc66;
+  background: #0077ff;
   color: #fff;
   padding: 15px 40px;
   border: none;
@@ -27,43 +35,97 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.cta:hover { background: #00b359; }
+.cta:hover { background: #005fcc; }
 
-/* Cards */
-.cards { padding: 80px 20px; text-align: center; }
-.cards h2 { font-size: 32px; margin-bottom: 20px; }
-.section-desc { max-width: 600px; margin: auto; font-size: 18px; color: #555; margin-bottom: 40px; }
-.card-grid {
+/* Sections */
+.section {
+  padding: 80px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+.section h2 { font-size: 40px; margin-bottom: 20px; }
+.section .lead { font-size: 20px; margin-bottom: 20px; color: #333; }
+
+/* Horizontal Cards */
+.cards-section { padding: 60px 20px; }
+.cards-section h2 { font-size: 32px; text-align: center; margin-bottom: 30px; }
+.card-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0 20px;
+}
+.card-row::-webkit-scrollbar { display: none; }
+.card {
+  flex: 0 0 280px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 20px;
+  scroll-snap-align: start;
+}
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+.stat {
+  flex: 1 1 250px;
+  margin: 20px;
+}
+.stat h2 { font-size: 52px; margin-bottom: 10px; }
+.stat p { font-size: 18px; color: #444; }
+
+/* Testimonials */
+.testimonials {
+  background: #fafafa;
+  padding: 80px 20px;
+}
+.testimonials h2 { text-align: center; font-size: 36px; margin-bottom: 40px; }
+.testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   max-width: 1000px;
   margin: auto;
 }
-.card {
+.testimonial {
   background: #fff;
   border-radius: 12px;
+  padding: 30px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  padding: 20px;
-  transition: transform 0.3s ease;
+  font-size: 16px;
+  line-height: 1.6;
 }
-.card:hover { transform: translateY(-5px); }
-.card img { max-width: 100%; border-radius: 8px; margin-bottom: 15px; }
-.card h3 { margin: 10px 0; font-size: 20px; }
-
-/* Promo */
-.promo { text-align: center; padding: 60px 20px; }
-.promo-img {
-  max-width: 700px; width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+.testimonial span {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #0077ff;
 }
-.promo-text { font-size: 16px; margin-top: 15px; color: #666; }
 
 /* Pricing */
-.pricing { padding: 80px 20px; max-width: 800px; margin: auto; text-align: center; }
+.pricing {
+  padding: 80px 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+.pricing h2 { font-size: 36px; margin-bottom: 30px; }
 .benefits { list-style: none; padding: 0; }
-.benefits li { margin: 10px 0; font-size: 18px; }
+.benefits li { margin: 12px 0; font-size: 18px; }
 
 /* Floating Payment Box */
 .floating-box {
@@ -97,7 +159,7 @@ body {
 }
 .spinner {
   border: 6px solid #f3f3f3;
-  border-top: 6px solid #00cc66;
+  border-top: 6px solid #0077ff;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -106,69 +168,45 @@ body {
 }
 @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
 
-/* Features */
-.features {
-  padding: 80px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-.features h2 {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 50px;
-}
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-}
-.feature {
-  text-align: center;
-  padding: 20px;
-}
-.feature h3 {
-  font-size: 22px;
-  margin-bottom: 15px;
-}
-.feature p {
-  font-size: 16px;
-  color: #444;
-}
+/* Animations */
+.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+.fade-up { opacity: 0; transform: translateY(50px); animation: slideUp 1s forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-/* Testimonials */
-.testimonials {
+/* Pain Killer */
+.painkiller {
   background: #fafafa;
   padding: 80px 20px;
-}
-.testimonials h2 {
   text-align: center;
-  font-size: 32px;
-  margin-bottom: 50px;
 }
-.testimonial-grid {
+.painkiller-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   max-width: 1000px;
   margin: auto;
 }
-.testimonial {
+.pain {
   background: #fff;
-  border-radius: 12px;
   padding: 30px;
+  border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  font-size: 16px;
-  line-height: 1.6;
-}
-.testimonial span {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #00cc66;
 }
 
-/* Motion Animations */
-.fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
-.slide-up { opacity: 0; transform: translateY(50px); animation: slideUp 1s forwards; }
-@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+/* Stats */
+.stats {
+  padding: 80px 20px;
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+.stats .lead {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+.stats p {
+  color: #444;
+  margin-bottom: 15px;
+}
