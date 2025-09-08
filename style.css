@@ -19,7 +19,7 @@ body {
 /* Hero */
 .hero {
   text-align: center;
-  padding: 100px 20px 60px;
+  padding: 50px 20px 60px;
   background: linear-gradient(to bottom, #fff, #f8f8f8);
 }
 .logo { width: 220px; margin-bottom: 20px; }
@@ -39,7 +39,7 @@ body {
 
 /* Sections */
 .section {
-  padding: 80px 20px;
+  padding: 20px 20px;
   max-width: 900px;
   margin: auto;
   text-align: center;
@@ -48,7 +48,7 @@ body {
 .section .lead { font-size: 20px; margin-bottom: 20px; color: #333; }
 
 /* Horizontal Cards */
-.cards-section { padding: 60px 20px; }
+.cards-section { padding: 20px 20px; }
 .cards-section h2 { font-size: 32px; text-align: center; margin-bottom: 30px; }
 .card-row {
   display: flex;
@@ -78,7 +78,7 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
   text-align: center;
-  padding: 80px 20px;
+  padding: 20px 20px;
   background: #f9f9f9;
 }
 .stat {
@@ -91,7 +91,7 @@ body {
 /* Testimonials */
 .testimonials {
   background: #fafafa;
-  padding: 80px 20px;
+  padding: 20px 20px;
 }
 .testimonials h2 { text-align: center; font-size: 36px; margin-bottom: 40px; }
 .testimonial-grid {
@@ -118,7 +118,7 @@ body {
 
 /* Pricing */
 .pricing {
-  padding: 80px 20px;
+  padding: 20px 20px;
   max-width: 800px;
   margin: auto;
   text-align: center;
@@ -177,7 +177,7 @@ body {
 /* Pain Killer */
 .painkiller {
   background: #fafafa;
-  padding: 80px 20px;
+  padding: 20px 20px;
   text-align: center;
 }
 .painkiller-grid {
@@ -196,7 +196,7 @@ body {
 
 /* Stats */
 .stats {
-  padding: 80px 20px;
+  padding: 20px 20px;
   text-align: center;
   max-width: 800px;
   margin: auto;
@@ -210,3 +210,4 @@ body {
   color: #444;
   margin-bottom: 15px;
 }
+section { padding: 40px 20px; } 
