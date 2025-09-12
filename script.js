@@ -56,38 +56,42 @@ document.getElementById("payBtn").addEventListener("click", async () => {
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("payBtn").click();
 });
-// ===== Popup Handling =====
-const popup = document.getElementById("paymentPopup");
-const openPopupBtn = document.getElementById("payBtnBottom");
-const closePopupBtn = document.getElementById("closePopup");
-const btnPromptPay = document.getElementById("btnPromptPay");
-const btnStripe = document.getElementById("btnStripe");
-
-// เปิด Popup
-openPopupBtn.addEventListener("click", () => {
-  popup.style.display = "flex";
+// เปิด popup เมื่อกดปุ่มล่าง
+document.getElementById("payBtnBottom").addEventListener("click", () => {
+  document.getElementById("paymentPopup").style.display = "flex";
 });
 
-// ปิด Popup
-closePopupBtn.addEventListener("click", () => {
-  popup.style.display = "none";
+// ปิด popup
+document.getElementById("closePopup").addEventListener("click", () => {
+  document.getElementById("paymentPopup").style.display = "none";
 });
 
-// คลิกนอกกรอบ -> ปิด popup
-window.addEventListener("click", (e) => {
-  if (e.target === popup) {
-    popup.style.display = "none";
+// PromptPay → ยิง webhook พร้อม lineId
+document.getElementById("promptpayBtn").addEventListener("click", async () => {
+  document.getElementById("overlay").style.display = "flex";
+  try {
+    await fetch("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lineId })
+    });
+  } catch (err) {
+    console.error("PromptPay Error:", err);
   }
 });
 
-// ปุ่ม PromptPay
-btnPromptPay.addEventListener("click", () => {
-  window.location.href = "https://yourdomain.com/promptpay"; 
-  // 🔧 ใส่ลิงก์ PromptPay หรือ webhook ของ Make
-});
-
-// ปุ่ม Stripe (3 เดือน)
-btnStripe.addEventListener("click", () => {
-  window.location.href = "https://yourdomain.com/stripe-checkout"; 
-  // 🔧 ใส่ลิงก์ Stripe Checkout 3 เดือน
+// 3 เดือนบัตร → ใช้ flow เดิม
+document.getElementById("card3mBtn").addEventListener("click", async () => {
+  document.getElementById("overlay").style.display = "flex";
+  try {
+    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lineId, plan: "3m_card" })
+    });
+    const data = await res.json();
+    if (data.checkout_url) window.location.href = data.checkout_url;
+  } catch (err) {
+    console.error("Card3m Error:", err);
+  }
 });
