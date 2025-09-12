@@ -224,67 +224,62 @@ section { padding: 40px 20px; }
   animation: fadeIn 0.3s ease;
 }
 
-/* Popup Content */
+/* Popup Style */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
 .popup-content {
   background: #fff;
-  padding: 30px 20px;
-  border-radius: 16px;
+  padding: 30px 25px;
+  border-radius: 12px;
+  max-width: 360px;
   width: 90%;
-  max-width: 420px;
   text-align: center;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
-  animation: slideUp 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
 }
-
 .popup h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  font-size: 22px;
 }
-
-.popup-note {
-  font-size: 16px;
-  color: #444;
+.popup .note {
+  font-size: 15px;
   margin-bottom: 20px;
-  line-height: 1.5;
+  color: #333;
 }
-
-.pay-option {
+.popup-btn {
   display: block;
   width: 100%;
-  padding: 18px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
   margin: 12px 0;
-  transition: all 0.25s ease;
+  padding: 14px;
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
-
-.pay-option.primary {
-  background: #00b050;
+.cta.popup-btn {
+  background: #00c853;
   color: #fff;
 }
-.pay-option.primary:hover { background: #008f42; }
-
-.pay-option.secondary {
+.cta-secondary.popup-btn {
   background: #0077ff;
   color: #fff;
 }
-.pay-option.secondary:hover { background: #005fcc; }
-
-.popup-small {
-  font-size: 14px;
+.small-text {
+  font-size: 13px;
   color: #666;
-  margin-top: 15px;
-  line-height: 1.4;
+  margin-top: 10px;
 }
-
-.popup-close {
-  margin-top: 20px;
-  background: none;
+.close-btn {
+  margin-top: 15px;
+  background: transparent;
   border: none;
-  color: #0077ff;
-  font-size: 16px;
+  color: #555;
   cursor: pointer;
 }
