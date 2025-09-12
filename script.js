@@ -84,7 +84,7 @@ document.getElementById("promptpayBtn").addEventListener("click", async () => {
 document.getElementById("card3mBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
-    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+    const res = await fetch("https://hook.eu2.make.com/ogrjrjlaxmifnx86y8xs4u9wpwk3r37j", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ lineId, plan: "3m_card" })
