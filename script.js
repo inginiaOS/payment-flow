@@ -53,9 +53,9 @@ document.getElementById("payBtn").addEventListener("click", async () => {
     document.getElementById("overlay").style.display = "none";
   }
 });
-document.getElementById("payBtnBottom").addEventListener("click", () => {
-  document.getElementById("payBtn").click();
-});
+//document.getElementById("payBtnBottom").addEventListener("click", () => {
+  //document.getElementById("payBtn").click();
+//});
 // เปิด popup เมื่อกดปุ่มล่าง
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "flex";
