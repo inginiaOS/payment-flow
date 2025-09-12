@@ -56,3 +56,38 @@ document.getElementById("payBtn").addEventListener("click", async () => {
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("payBtn").click();
 });
+// ===== Popup Handling =====
+const popup = document.getElementById("paymentPopup");
+const openPopupBtn = document.getElementById("payBtnBottom");
+const closePopupBtn = document.getElementById("closePopup");
+const btnPromptPay = document.getElementById("btnPromptPay");
+const btnStripe = document.getElementById("btnStripe");
+
+// เปิด Popup
+openPopupBtn.addEventListener("click", () => {
+  popup.style.display = "flex";
+});
+
+// ปิด Popup
+closePopupBtn.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
+// คลิกนอกกรอบ -> ปิด popup
+window.addEventListener("click", (e) => {
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+});
+
+// ปุ่ม PromptPay
+btnPromptPay.addEventListener("click", () => {
+  window.location.href = "https://yourdomain.com/promptpay"; 
+  // 🔧 ใส่ลิงก์ PromptPay หรือ webhook ของ Make
+});
+
+// ปุ่ม Stripe (3 เดือน)
+btnStripe.addEventListener("click", () => {
+  window.location.href = "https://yourdomain.com/stripe-checkout"; 
+  // 🔧 ใส่ลิงก์ Stripe Checkout 3 เดือน
+});
