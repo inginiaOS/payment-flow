@@ -11,14 +11,14 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
-  <!-- Page Loader -->
-  <div id="pageLoader">
-    <div class="preloader-content">
-      <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" alt="InginiaOS LITE Logo" class="preloader-logo">
-      <div class="spinner"></div>
-      <p class="loading-text">กำลังโหลดระบบ กรุณารอสักครู่...</p>
-    </div>
+  <!-- Preloader -->
+<div id="pageLoader">
+  <div class="preloader-content">
+    <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" alt="InginiaOS LITE Logo" class="preloader-logo">
+    <div class="preloader-spinner"></div>
+    <p class="loading-text">กำลังโหลดระบบ กรุณารอสักครู่...</p>
   </div>
+</div>
 
   <!-- Main Content -->
   <div id="mainContent">
@@ -119,11 +119,6 @@
     </div>
   </div>
 
-  <!-- Overlay Loader -->
-  <div id="overlay">
-    <div class="spinner"></div>
-    <div>⏳ กำลังเตรียมการ กรุณารอสักครู่...</div>
-  </div>
 
   <!-- Popup เลือกวิธีชำระเงิน -->
   <div id="paymentPopup" class="popup">
@@ -142,6 +137,12 @@
       <button id="closePopup" class="close-btn">ปิด</button>
     </div>
   </div>
+
+    <!-- Overlay (ตอนกด PromptPay / บัตรเครดิต เท่านั้น) -->
+<div id="overlay">
+  <div class="overlay-spinner"></div>
+  <div>⏳ กำลังเตรียมการ กรุณารอสักครู่...</div>
+</div>
 
   <script src="script.js" defer></script>
 </body>
