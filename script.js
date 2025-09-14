@@ -89,9 +89,11 @@ window.addEventListener("load", async () => {
 // ปุ่มทั้งหมด
 // ---------------------------
 
-// ปุ่ม "สมัครตอนนี้" (เปิด popup เท่านั้น)
-document.getElementById("payBtnBottom")?.addEventListener("click", () => {
-  document.getElementById("paymentPopup").style.display = "flex";
+// ปุ่ม "สมัครตอนนี้" ทุกปุ่ม → เปิด popup
+document.querySelectorAll("#payBtnBottom, .cta").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("paymentPopup").style.display = "flex";
+  });
 });
 
 // ปุ่มปิด popup
