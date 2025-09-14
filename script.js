@@ -5,6 +5,10 @@
 // 1. เริ่มต้น LIFF
 let lineId = null;
 
+// ตอนเริ่ม → ปิดปุ่มไว้ก่อน
+document.getElementById("payBtn").disabled = true;
+document.getElementById("payBtnBottom").disabled = true;
+
 liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
   if (!liff.isLoggedIn()) {
     liff.login();
@@ -14,6 +18,11 @@ liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
       lineId = profile.userId;
       localStorage.setItem("lineId", lineId); // backup กันหาย
       console.log("LINE ID ที่ดึงมาได้:", lineId);
+
+      // ✅ ปิด Preloader + เปิดปุ่ม
+      document.getElementById("preloader").style.display = "none";
+      document.getElementById("payBtn").disabled = false;
+      document.getElementById("payBtnBottom").disabled = false;
     } catch (err) {
       console.error("❌ ไม่สามารถดึง LINE Profile ได้:", err);
     }
@@ -59,13 +68,10 @@ async function safePost(url, body = {}) {
   return res.json();
 }
 
-// ---------------------------
-// Event Listeners
-// ---------------------------
-
-// ปุ่มสมัครตอนนี้ (flow เดิม)
+// 4. ดักปุ่ม "สมัครตอนนี้" (flow เดิม)
 document.getElementById("payBtn").addEventListener("click", async () => {
-  document.getElementById("overlay").style.display = "flex"; // ✅ show loading
+  document.getElementById("overlay").style.display = "flex";
+
   try {
     const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4");
     if (data && data.checkout_url) {
@@ -81,7 +87,7 @@ document.getElementById("payBtn").addEventListener("click", async () => {
   }
 });
 
-// ปุ่มสมัครล่าง → เปิด popup
+// เปิด popup เมื่อกดปุ่มล่าง
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "flex";
 });
@@ -93,7 +99,7 @@ document.getElementById("closePopup").addEventListener("click", () => {
 
 // PromptPay → webhook ใหม่
 document.getElementById("promptpayBtn").addEventListener("click", async () => {
-  document.getElementById("overlay").style.display = "flex"; // ✅ show loading
+  document.getElementById("overlay").style.display = "flex";
   try {
     const data = await safePost("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r");
     if (data && data.checkout_url) {
@@ -111,7 +117,7 @@ document.getElementById("promptpayBtn").addEventListener("click", async () => {
 
 // 3 เดือนบัตร → ใช้ flow เดิม
 document.getElementById("card3mBtn").addEventListener("click", async () => {
-  document.getElementById("overlay").style.display = "flex"; // ✅ show loading
+  document.getElementById("overlay").style.display = "flex";
   try {
     const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
       plan: "3m_card",
