@@ -89,8 +89,8 @@ window.addEventListener("load", async () => {
 // ปุ่มทั้งหมด
 // ---------------------------
 
-// ปุ่ม "สมัครตอนนี้" ทุกปุ่ม → เปิด popup
-document.querySelectorAll("#payBtnBottom, .cta").forEach(btn => {
+// ปุ่ม "สมัครตอนนี้" เท่านั้น → เปิด popup
+document.querySelectorAll("#payBtnTop, #payBtnBottom").forEach(btn => {
   btn.addEventListener("click", () => {
     document.getElementById("paymentPopup").style.display = "flex";
   });
