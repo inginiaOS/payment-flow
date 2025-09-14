@@ -164,6 +164,19 @@ body {
   color: #333;
 }
 
+/* Preloader Spinner */
+.preloader-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #0077ff;
+  border-right: 8px solid #00cc66;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+
 /* Popup */
 .popup {
   display: none;
@@ -222,4 +235,15 @@ body {
   border: none;
   color: #555;
   cursor: pointer;
+}
+
+/* Overlay Spinner */
+.overlay-spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #0077ff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
 }
