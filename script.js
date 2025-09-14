@@ -5,29 +5,35 @@
 // 1. เริ่มต้น LIFF
 let lineId = null;
 
-// ตอนเริ่ม → ปิดปุ่มไว้ก่อน
-document.getElementById("payBtn").disabled = true;
-document.getElementById("payBtnBottom").disabled = true;
+async function initLIFF() {
+  try {
+    await liff.init({ liffId: "2007908663-5ZQOKd2G" });
 
-liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
-  if (!liff.isLoggedIn()) {
-    liff.login();
-  } else {
-    try {
-      const profile = await liff.getProfile();
-      lineId = profile.userId;
-      localStorage.setItem("lineId", lineId); // backup กันหาย
-      console.log("LINE ID ที่ดึงมาได้:", lineId);
-
-      // ✅ ปิด Preloader + เปิดปุ่ม
-      document.getElementById("preloader").style.display = "none";
-      document.getElementById("payBtn").disabled = false;
-      document.getElementById("payBtnBottom").disabled = false;
-    } catch (err) {
-      console.error("❌ ไม่สามารถดึง LINE Profile ได้:", err);
+    if (!liff.isLoggedIn()) {
+      liff.login();
+      return;
     }
+
+    const profile = await liff.getProfile();
+    lineId = profile.userId;
+    localStorage.setItem("lineId", lineId);
+    console.log("✅ LINE ID ที่ดึงมาได้ทันที:", lineId);
+  } catch (err) {
+    console.error("❌ initLIFF error:", err);
   }
-});
+}
+
+// ฟังก์ชันรอ lineId 2-3 วิ ถ้าไม่ได้ก็ปล่อยหน้า
+async function waitForLineId(timeout = 3000) {
+  const start = Date.now();
+  while (!lineId && Date.now() - start < timeout) {
+    await new Promise(r => setTimeout(r, 300));
+  }
+  // ปล่อยหน้าเสมอหลัง timeout
+  document.getElementById("pageLoader").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
+  console.log("⏳ ปล่อยหน้าแล้ว, lineId =", lineId);
+}
 
 // 2. ฟังก์ชันกันตาย: ดึง lineId ให้ชัวร์
 async function ensureLineId() {
@@ -68,10 +74,24 @@ async function safePost(url, body = {}) {
   return res.json();
 }
 
-// 4. ดักปุ่ม "สมัครตอนนี้" (flow เดิม)
+// ---------------------------
+// เริ่มทำงาน
+// ---------------------------
+window.addEventListener("load", async () => {
+  document.getElementById("pageLoader").style.display = "flex"; // loader
+  document.getElementById("mainContent").style.display = "none";
+
+  await initLIFF();
+  await waitForLineId(3000); // รอสูงสุด 3 วิ
+});
+
+// ---------------------------
+// ปุ่ม (ใช้โค้ดเดิมทั้งหมด)
+// ---------------------------
+
+// ปุ่ม "สมัครตอนนี้"
 document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
-
   try {
     const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4");
     if (data && data.checkout_url) {
@@ -87,17 +107,16 @@ document.getElementById("payBtn").addEventListener("click", async () => {
   }
 });
 
-// เปิด popup เมื่อกดปุ่มล่าง
+// popup ล่าง
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "flex";
 });
 
-// ปิด popup
 document.getElementById("closePopup").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "none";
 });
 
-// PromptPay → webhook ใหม่
+// PromptPay
 document.getElementById("promptpayBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
@@ -115,7 +134,7 @@ document.getElementById("promptpayBtn").addEventListener("click", async () => {
   }
 });
 
-// 3 เดือนบัตร → ใช้ flow เดิม
+// 3 เดือนบัตร
 document.getElementById("card3mBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
