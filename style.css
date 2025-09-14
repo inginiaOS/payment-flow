@@ -127,7 +127,7 @@ body {
   color: #fff;
   font-size: 20px;
   flex-direction: column;
-  z-index: 9999;
+  z-index: 10001;
 }
 
 @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
