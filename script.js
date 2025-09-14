@@ -20,42 +20,64 @@ liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
   }
 });
 
-// 2. ดักปุ่ม "สมัครตอนนี้"
+// 2. ฟังก์ชันกันตาย: ดึง lineId ให้ชัวร์
+async function ensureLineId() {
+  if (!lineId) {
+    lineId = localStorage.getItem("lineId") || null;
+  }
+
+  if (!lineId) {
+    try {
+      const profile = await liff.getProfile();
+      lineId = profile.userId;
+      localStorage.setItem("lineId", lineId);
+    } catch (err) {
+      console.error("❌ ยังไม่ได้ LINE ID:", err);
+    }
+  }
+
+  return lineId;
+}
+
+// 3. ฟังก์ชันกลาง → ใช้ยิง webhook แต่เช็ค lineId ก่อน
+async function safePost(url, body = {}) {
+  const id = await ensureLineId();
+  if (!id) {
+    alert("❌ ไม่พบ LINE ID กรุณาเปิดจาก LINE App แล้วลองใหม่");
+    document.getElementById("overlay").style.display = "none";
+    return null;
+  }
+
+  body.lineId = id;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  return res.json();
+}
+
+// 4. ดักปุ่ม "สมัครตอนนี้" (flow เดิม)
 document.getElementById("payBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
 
   try {
-    // ถ้า lineId ยังว่าง → ลองดึงจาก localStorage
-    if (!lineId) {
-      lineId = localStorage.getItem("lineId") || null;
-    }
-
-    // ✅ ยิงไปที่ Webhook ของ Make พร้อมส่ง lineId
-    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId })
-    });
-
-    const data = await res.json();
-
-    if (data.checkout_url) {
-      // ✅ Redirect ไปหน้าชำระเงิน Stripe
+    const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4");
+    if (data && data.checkout_url) {
       window.location.href = data.checkout_url;
     } else {
       alert("❌ ไม่พบ checkout_url");
       document.getElementById("overlay").style.display = "none";
     }
-
   } catch (err) {
     console.error("เกิดข้อผิดพลาด:", err);
     alert("❌ ไม่สามารถเริ่มการชำระเงินได้");
     document.getElementById("overlay").style.display = "none";
   }
 });
-//document.getElementById("payBtnBottom").addEventListener("click", () => {
-  //document.getElementById("payBtn").click();
-//});
+
 // เปิด popup เมื่อกดปุ่มล่าง
 document.getElementById("payBtnBottom").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "flex";
@@ -66,17 +88,21 @@ document.getElementById("closePopup").addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "none";
 });
 
-// PromptPay → ยิง webhook พร้อม lineId
+// PromptPay → webhook ใหม่
 document.getElementById("promptpayBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
-    await fetch("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId })
-    });
+    const data = await safePost("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r");
+    if (data && data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      alert("❌ ไม่พบ checkout_url");
+      document.getElementById("overlay").style.display = "none";
+    }
   } catch (err) {
     console.error("PromptPay Error:", err);
+    alert("❌ ไม่สามารถเริ่มการชำระเงินได้");
+    document.getElementById("overlay").style.display = "none";
   }
 });
 
@@ -84,46 +110,17 @@ document.getElementById("promptpayBtn").addEventListener("click", async () => {
 document.getElementById("card3mBtn").addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
-    const res = await fetch("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId, plan: "3m_card" })
+    const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
+      plan: "3m_card",
     });
-    const data = await res.json();
-    if (data.checkout_url) window.location.href = data.checkout_url;
-  } catch (err) {
-    console.error("Card3m Error:", err);
-  }
-});
-// ดักปุ่ม PromptPay
-document.getElementById("promptpayBtn").addEventListener("click", async () => {
-  document.getElementById("overlay").style.display = "flex";
-
-  try {
-    // ถ้า lineId ยังว่าง → ลองดึงจาก localStorage
-    if (!lineId) {
-      lineId = localStorage.getItem("lineId") || null;
-    }
-
-    // ✅ ยิงไปที่ Webhook ของ Make สำหรับ PromptPay
-    const res = await fetch("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lineId })
-    });
-
-    const data = await res.json();
-
-    if (data.checkout_url) {
-      // ✅ Redirect ไปหน้าชำระเงิน PromptPay
+    if (data && data.checkout_url) {
       window.location.href = data.checkout_url;
     } else {
       alert("❌ ไม่พบ checkout_url");
       document.getElementById("overlay").style.display = "none";
     }
-
   } catch (err) {
-    console.error("เกิดข้อผิดพลาด:", err);
+    console.error("Card3m Error:", err);
     alert("❌ ไม่สามารถเริ่มการชำระเงินได้");
     document.getElementById("overlay").style.display = "none";
   }
