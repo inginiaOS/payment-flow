@@ -5,6 +5,10 @@
 // 1. เริ่มต้น LIFF
 let lineId = null;
 
+// ตอนเริ่ม → ปิดปุ่มไว้ก่อน
+document.getElementById("payBtn").disabled = true;
+document.getElementById("payBtnBottom").disabled = true;
+
 liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
   if (!liff.isLoggedIn()) {
     liff.login();
@@ -14,6 +18,11 @@ liff.init({ liffId: "2007908663-5ZQOKd2G" }).then(async () => {
       lineId = profile.userId;
       localStorage.setItem("lineId", lineId); // backup กันหาย
       console.log("LINE ID ที่ดึงมาได้:", lineId);
+
+      // ✅ ปิด Preloader + เปิดปุ่ม
+      document.getElementById("preloader").style.display = "none";
+      document.getElementById("payBtn").disabled = false;
+      document.getElementById("payBtnBottom").disabled = false;
     } catch (err) {
       console.error("❌ ไม่สามารถดึง LINE Profile ได้:", err);
     }
