@@ -1,5 +1,5 @@
 // ---------------------------
-// script.js
+// script.js (Clean Version)
 // ---------------------------
 
 // 1. เริ่มต้น LIFF
@@ -89,7 +89,7 @@ window.addEventListener("load", async () => {
 // ปุ่มทั้งหมด
 // ---------------------------
 
-// ปุ่ม "สมัครตอนนี้" เท่านั้น → เปิด popup
+// ปุ่ม "สมัครตอนนี้" → เปิด popup
 document.querySelectorAll("#payBtnTop, #payBtnBottom").forEach(btn => {
   btn.addEventListener("click", () => {
     document.getElementById("paymentPopup").style.display = "flex";
@@ -101,11 +101,30 @@ document.getElementById("closePopup")?.addEventListener("click", () => {
   document.getElementById("paymentPopup").style.display = "none";
 });
 
+// ---------------------------
+// Email Validation → ปลดล็อกปุ่ม
+// ---------------------------
+const emailInput = document.getElementById("customerEmail");
+const promptpayBtn = document.getElementById("promptpayBtn");
+const card3mBtn = document.getElementById("card3mBtn");
+
+emailInput?.addEventListener("input", () => {
+  const valid = emailInput.value.includes("@");
+  promptpayBtn.disabled = !valid;
+  card3mBtn.disabled = !valid;
+});
+
+// ---------------------------
+// ปุ่มชำระเงิน (ส่ง email ไปด้วย)
+// ---------------------------
+
 // PromptPay → overlay
-document.getElementById("promptpayBtn")?.addEventListener("click", async () => {
+promptpayBtn?.addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
-    const data = await safePost("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r");
+    const data = await safePost("https://hook.eu2.make.com/6yx7nzk71gxqh24tc6829gwmn7i75l2r", {
+      email: emailInput.value
+    });
     if (data && data.checkout_url) {
       window.location.href = data.checkout_url;
     } else {
@@ -120,11 +139,12 @@ document.getElementById("promptpayBtn")?.addEventListener("click", async () => {
 });
 
 // บัตร 3 เดือน → overlay
-document.getElementById("card3mBtn")?.addEventListener("click", async () => {
+card3mBtn?.addEventListener("click", async () => {
   document.getElementById("overlay").style.display = "flex";
   try {
     const data = await safePost("https://hook.eu2.make.com/gqucrevsxa9jhufojln0a08q88djdla4", {
       plan: "3m_card",
+      email: emailInput.value
     });
     if (data && data.checkout_url) {
       window.location.href = data.checkout_url;
