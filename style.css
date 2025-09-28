@@ -238,11 +238,10 @@ body {
   animation: spin 1s linear infinite;
   margin-bottom: 20px;
 }
-/* Floating Payment Box */
 .floating-box {
-  position: sticky;
+  position: fixed;
   bottom: 20px;
-  margin: 0 auto;
+  right: 20px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -250,8 +249,9 @@ body {
   text-align: center;
   max-width: 300px;
   animation: floatUp 0.8s ease;
-  z-index: 10; /* กันเผื่อ overlay บัง */
+  z-index: 10;
 }
+
 .floating-wrapper {
-  padding-bottom: 100px; /* กันชนท้าย content */
+  padding-bottom: 180px; /* กันไม่ให้กล่องบัง text ด้านล่าง */
 }
