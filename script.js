@@ -142,3 +142,35 @@ document.getElementById("card3mBtn")?.addEventListener("click", async () => {
     document.getElementById("overlay").style.display = "none";
   }
 });
+// --- Scroll Indicator for Horizontal Card Row ---
+const cardRow = document.querySelector('.card-row');
+const dots = document.querySelectorAll('.scroll-indicator .dot');
+
+if (cardRow && dots.length > 0) {
+  cardRow.addEventListener('scroll', () => {
+    const scrollLeft = cardRow.scrollLeft;
+    const maxScroll = cardRow.scrollWidth - cardRow.clientWidth;
+    const scrollPercent = scrollLeft / maxScroll;
+
+    // คำนวณ index ที่ active (0–6)
+    const activeIndex = Math.round(scrollPercent * (dots.length - 1));
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIndex);
+    });
+  });
+
+  // ✅ Animation ตอนเปิดหน้า - เพื่อดึงสายตา
+  let hintIndex = 0;
+  const hintInterval = setInterval(() => {
+    dots.forEach((d, i) => d.classList.remove('animate'));
+    dots[hintIndex].classList.add('animate');
+    hintIndex = (hintIndex + 1) % dots.length;
+  }, 500);
+
+  // หยุด animation เมื่อเริ่มเลื่อนจริง
+  cardRow.addEventListener('scroll', () => {
+    clearInterval(hintInterval);
+    dots.forEach(d => d.classList.remove('animate'));
+  });
+}
