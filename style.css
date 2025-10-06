@@ -255,3 +255,62 @@ body {
 .floating-wrapper {
   padding-bottom: 180px; /* กันไม่ให้กล่องบัง text ด้านล่าง */
 }
+/* --- Section Features: Gradient Background --- */
+.cards-section {
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #e8f8ff 0%, #e6fff4 100%);
+  border-radius: 24px;
+  margin: 30px auto;
+  max-width: 960px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* ข้อความบอกให้เลื่อน */
+.scroll-hint {
+  text-align: center;
+  font-size: 16px;
+  color: #0077ff;
+  font-weight: 600;
+  margin-bottom: 15px;
+  animation: pulseHint 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseHint {
+  0% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+  100% { opacity: 0.4; transform: translateY(0); }
+}
+
+/* --- Scroll Indicator (Apple Style) --- */
+.scroll-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.scroll-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator .dot.active {
+  background: linear-gradient(90deg, #0077ff, #00cc66);
+  transform: scale(1.3);
+  box-shadow: 0 0 6px rgba(0,204,102,0.4);
+}
+
+/* --- จุด Animation เริ่มต้นแบบ Apple --- */
+@keyframes indicatorMove {
+  0%, 100% { transform: scale(1.3); opacity: 1; }
+  50% { transform: scale(0.8); opacity: 0.6; }
+}
+
+.scroll-indicator .dot.animate {
+  animation: indicatorMove 0.8s ease-in-out;
+}
