@@ -1,316 +1,155 @@
-body {
-  font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #fff;
-  color: #111;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InginiaOS LITE</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- ฟอนต์ Apple-like -->
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="pageLoader">
+    <div class="preloader-content">
+      <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" alt="InginiaOS LITE Logo" class="preloader-logo">
+      <div class="preloader-spinner"></div>
+      <p class="loading-text">กำลังโหลดระบบ กรุณารอสักครู่...</p>
+    </div>
+  </div>
 
-/* Gradient Apple Style */
-.gradient-text {
-  background: linear-gradient(90deg, #0077ff, #00cc66);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-}
+  <!-- Main Content -->
+  <div id="mainContent">
+    <!-- Hero -->
+    <header class="hero fade-in">
+      <div class="hero-content">
+        <img src="https://img5.pic.in.th/file/secure-sv1/logo--LITE-copy.md.png" 
+             alt="InginiaOS LITE Logo" class="logo">
+        <h1 class="gradient-text">InginiaOS LITE</h1>
+        <p class="subheadline">“ยิงแอดวันละพันก็ละลายน้ำ ถ้าคอนเทนต์ไม่มีทิศทาง”</p>
+        <button id="payBtnTop" class="cta">สมัครตอนนี้</button>
+      </div>
+    </header>
 
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 50px 20px 60px;
-  background: linear-gradient(to bottom, #fff, #f8f8f8);
-}
-.logo { width: 220px; margin-bottom: 20px; }
-.hero h1 { font-size: 52px; margin: 0; }
-.subheadline { font-size: 22px; color: #555; margin: 15px 0 30px; }
-.cta {
-  background: #0077ff;
-  color: #fff;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.cta:hover { background: #005fcc; }
+    <!-- Section 1 -->
+    <section class="section fade-up">
+      <h2 class="gradient-text">เบา แต่ทรงพลัง</h2>
+      <p class="lead">ธุรกิจจำนวนมากเสีย 1,500–3,000 บาท/วันไปกับคอนเทนต์ที่ไม่พาไปไหน</p> 
+      <p class="lead">แต่ 880 บาท/เดือนนี้ = ได้ทั้งแผน + คอนเทนต์ + ระบบ AI ครบชุด</p>
+      <p class="lead">โพสต์ทุกวัน มีเหตุผล ไม่ใช่แค่โพสต์ให้ครบ</p>
+      <p><strong>Multi-AI System:</strong> Gemini วิเคราะห์ตลาด → GPT ร่างโครงเรื่อง → Claude ขัดภาษา = ได้โพสต์พร้อมใช้ทันที</p>
+    </section>
 
-/* Sections */
-.section {
-  padding: 20px 20px;
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-}
-.section h2 { font-size: 40px; margin-bottom: 20px; }
-.section .lead { font-size: 20px; margin-bottom: 20px; color: #333; }
+    <!-- Horizontal Scroll Cards -->
+    <section class="cards-section fade-up">
+      <h2 class="gradient-text">InginiaOS LITE Features</h2>
+      <p class="scroll-hint">เลื่อนดูฟีเจอร์เพิ่มเติม ⟶</p>
+      <div class="card-row">
+        <div class="card">
+          <img src="https://i.ibb.co/RG7VkkGc/1.png" alt="Feature 1">
+          <h3>Marketing Strategy</h3>
+          <p>แผนการตลาดอัตโนมัติทุกเดือน → เลิกโพสต์มั่ว ๆ จนเปลืองงบ → กลายเป็น roadmap ชัด ๆ ว่าโพสต์แบบไหนทำให้ลูกค้ากดซื้อจริง</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/6JgN5GK1/7.png" alt="Feature 2">
+          <h3>All Device Ready</h3>
+          <p>ใช้งานได้ทุกอุปกรณ์ → เลิกปัญหาข้อมูลไม่ซิงค์ มือถือ-คอม → ทีมทำงานต่อเนื่องไม่มีสะดุด</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/4w00r8Tf/6.png" alt="Feature 3">
+          <h3>Multi-AI Generator</h3>
+          <p>(Gemini+GPT+Claude) ครบทั้ง insight, idea และ copy → ไม่ต้องสมัครหลายตัว → ได้โพสต์แข็ง ๆ พร้อมใช้</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/5W2gSGV0/5.png" alt="Feature 4">
+          <h3>AI Content Generator</h3>
+          <p>Caption, Hook, CTA พร้อม → ไม่เสียเวลาคิดวันละหลายชั่วโมง → คุณแค่ copy & paste หรือปรับนิดเดียว</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/Z1pQ4LY3/4.png" alt="Feature 5">
+          <h3>Insight Thai Customer</h3>
+          <p>AI วิเคราะห์พฤติกรรมลูกค้าไทย → รู้ทันเทศกาลและจังหวะขายจริง → ทำคอนเทนต์ตรงใจกว่าคู่แข่ง</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/b5TzvNpD/3.png" alt="Feature 6">
+          <h3>Calendar Dashboard</h3>
+          <p>ปฏิทิน 30 วันเต็ม → เลิกโพสต์ตามอารมณ์จนลูกค้าสับสน → แบรนด์ดูต่อเนื่องและน่าเชื่อถือ</p>
+        </div>
+        <div class="card">
+          <img src="https://i.ibb.co/Y7VdYhMP/2.png" alt="Feature 7">
+          <h3>Content OVERALL</h3>
+          <p>Dashboard รวมทุกโพสต์ทุกแพลตฟอร์ม → ไม่มั่ว ไม่พลาดกำหนด → ทำงานง่ายขึ้นเยอะ</p>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </section>
 
-/* Horizontal Cards */
-.cards-section { padding: 20px 20px; }
-.cards-section h2 { font-size: 32px; text-align: center; margin-bottom: 30px; }
-.card-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 10px 0 20px;
-}
-.card-row::-webkit-scrollbar { display: none; }
-.card {
-  flex: 0 0 280px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  padding: 20px;
-  scroll-snap-align: start;
-}
-.card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
+    <!-- Stats Section -->
+    <section class="stats fade-up">
+      <div class="stat">
+        <h2 class="gradient-text">85% ของ SME ไทยยังใช้ AI ได้ไม่เต็มศักยภาพ</h2>
+        <p>ส่วนใหญ่ยังใช้ AI แค่ช่วยเขียนแคปชัน/ทำรูป แต่ไม่เชื่อมกับกลยุทธ์การตลาดจริง ๆ → InginiaOS LITE ปิดช่องว่างนี้ให้คุณครบ</p>
+      </div>
+      <div class="stat">
+        <h2 class="gradient-text">คอนเทนต์ที่มีแผน → ดีกว่าโพสต์สุ่มถึง 3 เท่า</h2>
+        <p>จากการทดสอบกับ SME หลายอุตสาหกรรม → Engagement Rate สูงกว่าคอนเทนต์ที่เจ้าของคิดเองถึง 3 เท่า เพราะไม่ใช่แค่โพสต์ให้ครบ แต่เป็นโพสต์ที่ถูกวิเคราะห์มาแล้วว่าตอบโจทย์ลูกค้าจริง ๆ</p>
+      </div>
+    </section>
 
-/* Stats Section */
-.stats {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  text-align: center;
-  padding: 20px 20px;
-  background: #f9f9f9;
-}
-.stat {
-  flex: 1 1 250px;
-  margin: 20px;
-}
-.stat h2 { font-size: 52px; margin-bottom: 10px; }
-.stat p { font-size: 18px; color: #444; }
+    <!-- Pricing -->
+    <section class="pricing fade-up">
+      <h2 class="gradient-text">คุณจะได้อะไรบ้างจาก 880 บาท/เดือน</h2>
+      <ul class="benefits">
+        <li>✅ Content Pack 30 วัน (Caption + Hook + CTA พร้อม Direction)</li>
+        <li>✅ Multi-AI System (Gemini + GPT + Claude)</li>
+        <li>✅ Content Calendar (Notion – วางแผนล่วงหน้า)</li>
+        <li>✅ Monthly Note สำหรับการต่อยอดเดือนถัดไป</li>
+        <li>✅ Framework & Tools แบบ Agency ใช้จริง</li>
+        <li>✅ วิดีโอ Upskill การตลาด (ไม่ต้องเสียหมื่นเพื่อเรียน)</li>
+      </ul>
+    </section>
 
-/* Pricing */
-.pricing {
-  padding: 20px 20px;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-}
-.pricing h2 { font-size: 36px; margin-bottom: 30px; }
-.benefits { list-style: none; padding: 0; }
-.benefits li { margin: 12px 0; font-size: 18px; }
+    <!-- Floating Payment Box -->
+    <div class="floating-wrapper">
+      <div class="floating-box fade-up">
+        <h3>เพียง 880 บาท/เดือน เท่านั้น!!</h3>
+        <p>คอนเทนต์ + กลยุทธ์ + AI Tools พร้อมใช้ทันที</p>
+        <button id="payBtnBottom" class="cta">สมัครเลย</button>
+      </div>
+    </div>
 
-/* Floating Payment Box */
-.floating-box {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  padding: 20px 30px;
-  text-align: center;
-  max-width: 300px;
-  animation: floatUp 0.8s ease;
-}
-.floating-box h3 { margin: 0 0 10px; font-size: 20px; }
-.floating-box p { font-size: 16px; color: #444; margin-bottom: 15px; }
+    <!-- Popup -->
+    <div id="paymentPopup" class="popup">
+      <div class="popup-content">
+        <h2>เลือกวิธีชำระเงิน</h2>
+        <p class="note">ทดลองก่อนได้ → สมัคร <strong>880 บาท/เดือน</strong> (PromptPay) ไม่ตัดอัตโนมัติ</p>
+        <button id="promptpayBtn" class="cta popup-btn">PromptPay 880 บาท/เดือน</button>
+        <button id="card3mBtn" class="cta-secondary popup-btn">
+          บัตรเครดิต/เดบิต<br>
+          1,990 บาท / 3 เดือน (ประหยัด 25%)
+        </button>
+        <p class="small-text">* แบบ 3 เดือน รองรับเฉพาะบัตรเครดิต/เดบิต</p>
+        <button id="closePopup" class="close-btn">ปิด</button>
+      </div>
+    </div>
 
-/* Overlay */
-#overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 20px;
-  flex-direction: column;
-  z-index: 10001;
-}
+    <!-- Overlay -->
+    <div id="overlay">
+      <div class="overlay-spinner"></div>
+      <div>⏳ กำลังเตรียมการ กรุณารอสักครู่...</div>
+    </div>
+  </div>
 
-@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
-
-/* Preloader */
-#pageLoader {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10000;
-}
-.preloader-content { text-align: center; }
-.preloader-logo {
-  width: 160px;
-  margin-bottom: 20px;
-}
-.loading-text {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #333;
-}
-
-/* Preloader Spinner */
-.preloader-spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #0077ff;
-  border-right: 8px solid #00cc66;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  animation: spin 1s linear infinite;
-  margin: 20px auto;
-}
-
-
-/* Popup */
-.popup {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
-.popup-content {
-  background: #fff;
-  padding: 30px 25px;
-  border-radius: 12px;
-  max-width: 360px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-}
-.popup h2 {
-  margin-bottom: 15px;
-  font-size: 22px;
-}
-.popup .note {
-  font-size: 15px;
-  margin-bottom: 20px;
-  color: #333;
-}
-.popup-btn {
-  display: block;
-  width: 100%;
-  margin: 12px 0;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.cta.popup-btn {
-  background: #00c853;
-  color: #fff;
-}
-.cta-secondary.popup-btn {
-  background: #0077ff;
-  color: #fff;
-}
-.small-text {
-  font-size: 13px;
-  color: #666;
-  margin-top: 10px;
-}
-.close-btn {
-  margin-top: 15px;
-  background: transparent;
-  border: none;
-  color: #555;
-  cursor: pointer;
-}
-
-/* Overlay Spinner */
-.overlay-spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #0077ff;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 20px;
-}
-.floating-box {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  padding: 20px 30px;
-  text-align: center;
-  max-width: 300px;
-  animation: floatUp 0.8s ease;
-  z-index: 10;
-}
-
-.floating-wrapper {
-  padding-bottom: 180px; /* กันไม่ให้กล่องบัง text ด้านล่าง */
-}
-/* --- Section Features: Gradient Background --- */
-.cards-section {
-  padding: 40px 20px;
-  background: linear-gradient(180deg, #e8f8ff 0%, #e6fff4 100%);
-  border-radius: 24px;
-  margin: 30px auto;
-  max-width: 960px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-/* ข้อความบอกให้เลื่อน */
-.scroll-hint {
-  text-align: center;
-  font-size: 16px;
-  color: #0077ff;
-  font-weight: 600;
-  margin-bottom: 15px;
-  animation: pulseHint 1.6s ease-in-out infinite;
-}
-
-@keyframes pulseHint {
-  0% { opacity: 0.4; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-3px); }
-  100% { opacity: 0.4; transform: translateY(0); }
-}
-
-/* --- Scroll Indicator (Apple Style) --- */
-.scroll-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  margin-bottom: 10px;
-}
-
-.scroll-indicator .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-}
-
-.scroll-indicator .dot.active {
-  background: linear-gradient(90deg, #0077ff, #00cc66);
-  transform: scale(1.3);
-  box-shadow: 0 0 6px rgba(0,204,102,0.4);
-}
-
-/* --- จุด Animation เริ่มต้นแบบ Apple --- */
-@keyframes indicatorMove {
-  0%, 100% { transform: scale(1.3); opacity: 1; }
-  50% { transform: scale(0.8); opacity: 0.6; }
-}
-
-.scroll-indicator .dot.animate {
-  animation: indicatorMove 0.8s ease-in-out;
-}
+  <script src="script.js" defer></script>
+</body>
+</html>
