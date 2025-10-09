@@ -314,3 +314,36 @@ body {
 .scroll-indicator .dot.animate {
   animation: indicatorMove 0.8s ease-in-out;
 }
+/* Subheadline Strong */
+.subheadline-strong {
+  font-size: 20px;
+  color: #222;
+  margin: 10px 0 20px;
+  font-weight: 600;
+}
+
+/* Mini note under CTA */
+.mini-note {
+  font-size: 14px;
+  color: #0077ff;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Pulse animation for CTA */
+.cta {
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Premium look for pricing */
+.premium-box {
+  background: linear-gradient(180deg, #f0faff 0%, #f9fff5 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+  padding: 40px 20px;
+}
